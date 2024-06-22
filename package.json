@@ -23,5 +23,6 @@
     "nodemailer": "^6.9.7",
     "nodemon": "^3.0.2",
     "react-native-crypto": "^2.2.0"
-  }
+  },
+  "devDependencies": {}
 }
