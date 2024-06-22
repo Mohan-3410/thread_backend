@@ -21,10 +21,6 @@ const jwt = require('jsonwebtoken');
 const PORT = 3000;
 dbConnect().then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
 
-app.get('/', (req, res) => {
-    res.send("This is a thread application server")
-})
-
 const User = require('./models/user');
 const { send } = require('process');
 const Post = require('./models/post');
@@ -60,6 +56,7 @@ app.post('/register', async (req, res) => {
 const sendVerificationEmail = async (email, verificationToken) => {
     const transport = nodeMailer.createTransport({
         service: "gmail",
+        secure: false,
         auth: {
             user: process.env.EMAIL,
             pass: process.env.EMAIL_PASSWORD,
@@ -70,7 +67,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
         from: "threads.com",
         to: email,
         subject: "Email Verification",
-        text: `Please click on the link to verify your email: https://threadapp.azurewebsites.net//verify/${verificationToken}`
+        text: `Please click on the link to verify your email: http://localhost:3000/verify/${verificationToken}`
     }
 
     try {
