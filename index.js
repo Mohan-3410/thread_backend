@@ -10,16 +10,14 @@ dotenv.config({ path: "./.env" })
 
 const app = express();
 app.use(morgan('common'))
-const port = 3000;
 const cors = require('cors');
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const jwt = require('jsonwebtoken');
-
-const PORT = 3000;
-dbConnect().then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
+const PORT  = 3000
+dbConnect().then(() => app.listen(process.env.PORT || PORT, () => console.log(`Server running on port ${PORT}`)))
 
 const User = require('./models/user');
 const { send } = require('process');
